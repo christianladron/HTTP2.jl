@@ -130,7 +130,7 @@ function initialize_raw_loop_async(connection::HTTPConnection, buffer; skip_pref
         end
     end
 
-    put!(channel_act_raw, SettingsFrame(false, Nullable(Array{Tuple{Frame.SETTING_IDENTIFIER, UInt32}, 1}())))
+    put!(channel_act_raw, SettingsFrame(false, convert(Union{Nothing,Array{Tuple{Frame.SETTING_IDENTIFIER, UInt32}, 1}},Array{Tuple{Frame.SETTING_IDENTIFIER, UInt32}, 1}())))
 end
 
 function process_channel_act(connection::HTTPConnection)
@@ -203,7 +203,7 @@ function process_channel_evt(connection::HTTPConnection)
                 end
             end
             put!(channel_act_raw,
-                 SettingsFrame(true, Nullable{Tuple{Frame.SETTING_IDENTIFIER, UInt32}}()))
+                 SettingsFrame(true, convert(Union{Nothing,Tuple{Frame.SETTING_IDENTIFIER, UInt32}},Tuple{Frame.SETTING_IDENTIFIER, UInt32})))
         end
         return
     end
